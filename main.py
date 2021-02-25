@@ -9,13 +9,15 @@ game_speed = 0.1
 
 screen = Screen()
 screen.title("Pop the Lock")
-screen.setup(width=500, height=500)
+screen.setup(width=300, height=300)
 screen.tracer(0)
 screen.bgcolor("black")
 
 def key_pressed():
-    cursor.flip(cursor.INCREASE_SPEED)
+    global game_speed
+    cursor.flip()
     target.spawn(cursor.radius)
+    game_speed *= cursor.INCREASE_SPEED
 
 lock = Lock()
 cursor = Cursor()
@@ -29,6 +31,6 @@ game_is_on = True
 while game_is_on:
     time.sleep(game_speed)
     screen.update()
-    cursor.circle(radius=cursor.radius, extent=1)
+    cursor.circle(radius=cursor.radius, extent=2)
 
 screen.exitonclick()
