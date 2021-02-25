@@ -15,7 +15,7 @@ screen.bgcolor("black")
 
 def key_pressed():
     global game_speed
-    cursor.flip()
+    cursor.flip_direction()
     target.spawn(cursor.radius)
     game_speed *= cursor.INCREASE_SPEED
 

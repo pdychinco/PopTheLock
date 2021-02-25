@@ -17,7 +17,6 @@ class Cursor(Turtle):
         self.goto(START_POSITION)
         # self.setheading(self.FLIP_HEADING)
 
-    def flip(self):
+    def flip_direction(self):
         self.setheading(self.heading() + self.FLIP_HEADING)
         self.radius *= self.FLIP_DIRECTION
-        print(self.radius)
