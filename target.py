@@ -1,5 +1,5 @@
 from turtle import Turtle
-from random import randint
+from random import randint, choice
 x_cor = -40
 y_cor = 0
 MIN_DISTANCE = 40
@@ -15,6 +15,9 @@ class Target(Turtle):
     def spawn(self, radius):
         self.goto(self.random_cor(radius))
         self.showturtle()
+
+    def randomChoice(self):
+        return choice([True, False])
 
     def random_cor(self, radius):
         global x_cor
@@ -34,8 +37,7 @@ class Target(Turtle):
                 if last_x_cor < self.xcor():
                     y_cor = Y_POSITION_FLIP * (radius ** 2 - x_cor ** 2) ** 0.5
                 else:
-                    y_chance = randint(0, 1)
-                    if y_chance:
+                    if self.randomChoice():
                         y_cor = Y_POSITION_FLIP * (radius ** 2 - x_cor ** 2) ** 0.5
                     else:
                         y_cor = (radius ** 2 - x_cor ** 2) ** 0.5
@@ -51,8 +53,7 @@ class Target(Turtle):
                 if last_x_cor < self.xcor():
                     y_cor = Y_POSITION_FLIP * (radius ** 2 - x_cor ** 2) ** 0.5
                 else:
-                    y_chance = randint(0, 1)
-                    if y_chance:
+                    if self.randomChoice():
                         y_cor = Y_POSITION_FLIP * (radius ** 2 - x_cor ** 2) ** 0.5
                     else:
                         y_cor = (radius ** 2 - x_cor ** 2) ** 0.5
@@ -68,6 +69,17 @@ class Target(Turtle):
                     y_cor = Y_POSITION_FLIP * (radius ** 2 - x_cor ** 2) ** 0.5
         # if radius positive, cursor going left. if radius negative, cursor going right
         # current target quad 4
+        elif self.xcor() > 0 and self.ycor() < 0:
+            if radius < 0:
+                diff = abs(80 - int(self.xcor()))
+                x_cor = randint(int(self.xcor() - MIN_DISTANCE), int(self.xcor() + diff))
+                if last_x_cor > self.xcor():
+                    y_cor = (radius ** 2 - x_cor ** 2) ** 0.5
+                else:
+                    if self.randomChoice():
+                        y_cor = Y_POSITION_FLIP * (radius ** 2 - x_cor ** 2) ** 0.5
+                    else:
+                        y_cor = (radius ** 2 - x_cor ** 2) ** 0.5
         cor = (x_cor, y_cor)
         return cor
 
